@@ -1,0 +1,4 @@
+import type { Metadata } from 'next';
+import { ContentPage } from '@/components/content-page';
+export const metadata: Metadata = { title: 'Shipping' };
+export default function Page() { return <ContentPage draft eyebrow="Delivery" title="UK shipping, kept simple." intro="We currently deliver to United Kingdom addresses only."><h2>Standard UK delivery</h2><p>Delivery is £4.95, or complimentary when the product subtotal reaches £60. Orders normally arrive within 3–5 working days after dispatch.</p><h2>Tracking</h2><p>When your order leaves us, tracking information will be sent to the email address used at checkout.</p><h2>Delays and address changes</h2><p>Contact us promptly if an address needs correcting. Once an order has been dispatched, changes may no longer be possible.</p></ContentPage>; }

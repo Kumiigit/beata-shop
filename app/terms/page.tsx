@@ -1,0 +1,4 @@
+import type { Metadata } from 'next';
+import { ContentPage } from '@/components/content-page';
+export const metadata: Metadata = { title: 'Terms' };
+export default function Page() { return <ContentPage draft eyebrow="Terms" title="Store terms." intro="These draft terms describe the intended basis for shopping with Beata Shop."><h2>Products and pricing</h2><p>Prices are shown in GBP. Product descriptions, availability, and prices may be corrected before an order is accepted.</p><h2>Order acceptance</h2><p>A Stripe payment confirmation acknowledges payment; an order may still be cancelled and refunded if stock data was incorrect, fraud is suspected, or fulfilment is not possible.</p><h2>Liability</h2><p>Nothing in these terms limits rights that cannot legally be limited under United Kingdom consumer law.</p><h2>Contact</h2><p>Questions about these terms can be sent to hello@beata-shop.co.</p></ContentPage>; }

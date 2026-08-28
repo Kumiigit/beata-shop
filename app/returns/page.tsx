@@ -1,0 +1,4 @@
+import type { Metadata } from 'next';
+import { ContentPage } from '@/components/content-page';
+export const metadata: Metadata = { title: 'Returns' };
+export default function Page() { return <ContentPage draft eyebrow="Returns" title="A considered change of mind." intro="We want each piece to earn its place in your wardrobe."><h2>Return window</h2><p>Notify us within 14 days of receiving your order if you wish to return it. Items must be unworn, unwashed, and returned with their original labels and packaging.</p><h2>Starting a return</h2><p>Email hello@beata-shop.co with your order reference and the pieces you would like to return. Return postage is the customer’s responsibility unless an item is faulty or incorrect.</p><h2>Refunds</h2><p>Approved refunds are sent to the original payment method after the returned item has been inspected. Bank processing times can vary.</p></ContentPage>; }

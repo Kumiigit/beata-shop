@@ -1,0 +1,5 @@
+import type { Metadata } from 'next';
+import { ContentPage } from '@/components/content-page';
+import { LogoPlaceholder } from '@/components/logo-placeholder';
+export const metadata: Metadata = { title: 'Our story' };
+export default function Page() { return <ContentPage eyebrow="The Beata point of view" title="A quieter way to dress." intro="Beata Shop began with a simple belief: an everyday wardrobe should feel useful, expressive, and easy to return to."><LogoPlaceholder label="Beata Shop studio" /><h2>Fewer pieces, more possibility.</h2><p>We build small collections around relaxed proportions and a restrained palette. Each piece is designed to work with the next, so getting dressed becomes simpler without becoming anonymous.</p><h2>Made for repeat wear.</h2><p>Our essentials favour durable fabrics, comfortable finishing, and silhouettes that move naturally across routines. Product-specific sourcing and care information will be published before the first live collection launches.</p><blockquote>Quiet confidence does not ask for attention. It earns a place in your everyday.</blockquote></ContentPage>; }

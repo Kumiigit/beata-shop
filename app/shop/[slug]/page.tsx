@@ -1,0 +1,22 @@
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { AddToCart } from '@/components/add-to-cart';
+import { LogoPlaceholder } from '@/components/logo-placeholder';
+import { ProductCard } from '@/components/product-card';
+import { findSeedProduct, seedProducts } from '@/data/products';
+import { formatGBP } from '@/types/store';
+
+export function generateStaticParams() { return seedProducts.map((product) => ({ slug: product.slug })); }
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const product = findSeedProduct((await params).slug);
+  if (!product) return { title: 'Product not found' };
+  return { title: product.name, description: product.description, openGraph: { title: product.name, description: product.description, images: [] }, twitter: { title: product.name, description: product.description, images: [] } };
+}
+
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const product = findSeedProduct((await params).slug);
+  if (!product) notFound();
+  const related = seedProducts.filter((item) => item.id !== product.id).slice(0, 3);
+  return <main className="product-page"><div className="product-gallery"><LogoPlaceholder label={product.name} /><div className="gallery-thumbs"><LogoPlaceholder label={`${product.name} alternate view`} /><LogoPlaceholder label={`${product.name} detail view`} /></div></div><section className="product-info"><p className="eyebrow">{product.category}</p><h1>{product.name}</h1><p className="product-price">{formatGBP(product.pricePence)}</p><p className="product-description">{product.description}</p><AddToCart product={product} /><details open><summary>Details</summary><ul>{product.details.map((detail) => <li key={detail}>{detail}</li>)}</ul></details><details><summary>Delivery & returns</summary><p>Standard UK delivery is £4.95 and complimentary over £60. Return unworn pieces within 14 days.</p></details></section><section className="related-products"><div className="section-heading"><div><p className="eyebrow">Wear it with</p><h2>Complete the quiet uniform.</h2></div></div><div className="product-grid">{related.map((item) => <ProductCard product={item} key={item.id} />)}</div></section></main>;
+}
