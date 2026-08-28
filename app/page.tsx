@@ -1,33 +1,24 @@
-import { seedProducts } from '@/data/products';
-import { LogoPlaceholder } from '@/components/logo-placeholder';
+import { Cat, Coffee, Gift, Heart, Home as HomeIcon, PackageCheck, Paintbrush, Shirt, Sparkles } from 'lucide-react';
+import { ProductArtwork } from '@/components/product-artwork';
 import { ProductCard } from '@/components/product-card';
+import { seedProducts } from '@/data/products';
 
-const categories = [
-  { name: 'Essential layers', href: '/shop?category=Layers', note: 'Soft structure for changing days' },
-  { name: 'Tees & long sleeves', href: '/shop?category=Tees', note: 'The base of a quieter wardrobe' },
-  { name: 'Trousers & accessories', href: '/shop?category=Trousers', note: 'Useful finishing pieces' },
+const categoryCards = [
+  { name: 'T-shirts', note: 'Wear your cat obsession', href: '/shop?category=T-shirts', slug: 'cat-portrait-tee', icon: Shirt },
+  { name: 'Hoodies', note: 'Cosy, curious, unmistakably cat', href: '/shop?category=Hoodies', slug: 'cat-nap-club-hoodie', icon: Cat },
+  { name: 'Mugs', note: 'For slow mornings and warm paws', href: '/shop?category=Mugs', slug: 'morning-cat-mug', icon: Coffee },
+  { name: 'Home & gifts', note: 'For devoted cat people', href: '/shop?category=Home+%26+gifts', slug: 'snoozing-cat-cushion', icon: HomeIcon },
 ];
+const printSteps = [['cat-portrait-tee', 'Choose your piece'], ['cat-nap-club-hoodie', 'Send your idea'], ['morning-cat-mug', 'We make it yours'], ['stretch-cat-tote', 'Unwrap the magic']];
 
 export default function Home() {
-  const featured = seedProducts.filter((product) => product.featured).slice(0, 4);
-  return (
-    <main>
-      <section className="hero" id="new">
-        <div className="hero-copy">
-          <p className="eyebrow">The everyday collection · 2026</p>
-          <h1>Quiet confidence,<br />made for every day.</h1>
-          <p className="hero-intro">Considered unisex essentials in soft, enduring fabrics. Easy silhouettes, thoughtful detail, and nothing you do not need.</p>
-          <div className="hero-actions"><a className="button button-dark" href="/shop">Shop the collection</a><a className="text-link" href="/about">Discover our approach <span>→</span></a></div>
-          <dl className="hero-notes"><div><dt>01</dt><dd>Inclusive sizing<br />XS—XXL</dd></div><div><dt>02</dt><dd>Designed for<br />repeat wear</dd></div><div><dt>03</dt><dd>UK delivery<br />3—5 days</dd></div></dl>
-        </div>
-        <div className="hero-visual"><LogoPlaceholder label="Beata Shop campaign" /><p>Campaign image placeholder</p></div>
-      </section>
-      <section className="category-band" aria-label="Shop by category">
-        {categories.map((category, index) => <a href={category.href} key={category.name}><span>0{index + 1}</span><div><h2>{category.name}</h2><p>{category.note}</p></div><strong>→</strong></a>)}
-      </section>
-      <section className="collection" id="shop"><div className="section-heading"><div><p className="eyebrow">A refined uniform</p><h2>Pieces that work together.</h2></div><a className="text-link" href="/shop">View all eight pieces <span>→</span></a></div><div className="product-grid">{featured.map((product) => <ProductCard product={product} key={product.id} />)}</div></section>
-      <section className="story" id="story"><p className="eyebrow">The Beata point of view</p><blockquote>“Fewer, better pieces.<br />More ways to be yourself.”</blockquote><p>We design a small wardrobe of dependable essentials—balanced proportions, versatile tones, and a relaxed feel that moves easily between days.</p><a className="text-link light" href="/about">Read our story <span>→</span></a></section>
-      <section className="service-strip" aria-label="Store benefits"><div><span>01</span><h3>Complimentary delivery</h3><p>Free standard UK delivery over £60.</p></div><div><span>02</span><h3>Considered returns</h3><p>Simple returns within 14 days.</p></div><div><span>03</span><h3>Here to help</h3><p>Thoughtful support when you need it.</p></div></section>
-    </main>
-  );
+  return <main className="cat-home">
+    <section className="cat-hero"><img className="cat-hero-image" src="/cat-hero.png" alt="Four characterful cats posed with cat-themed clothing, mugs, bags and homeware" /><div className="cat-hero-shade" /><div className="cat-hero-copy"><p className="cat-kicker">Original gifts for cat people</p><h1>Designed for cat lovers.<br /><em>Made to make you smile.</em></h1><p>Playful clothing, cosy homeware and thoughtful gifts inspired by the cats who run our lives.</p><div className="cat-hero-actions"><a className="cat-button" href="/shop">Shop all things cat</a><a className="cat-link" href="#cat-club">Meet the collection <span>→</span></a></div><div className="cat-trust"><span>Independent designs</span><span>Printed with care</span><span>UK delivery</span></div></div></section>
+    <section className="cat-categories section-shell" aria-labelledby="category-title"><div className="cat-section-heading"><div><p className="cat-kicker">Find your favourite</p><h2 id="category-title">A little joy for every cat person.</h2></div><a href="/shop">View everything <span>→</span></a></div><div className="cat-category-grid">{categoryCards.map(({ name, note, href, slug, icon: Icon }) => <a href={href} key={name}><ProductArtwork slug={slug} label={`${name} collection`} /><div className="cat-category-copy"><Icon aria-hidden="true" /><div><h3>{name}</h3><p>{note}</p></div><span>→</span></div></a>)}</div></section>
+    <section className="cat-club" id="cat-club"><div className="cat-club-copy"><p className="cat-kicker">The Beata cat club</p><h2>Nine lives.<br />One iconic collection.</h2><p>Our original illustrated cats are curious, cosy and full of character—just like the ones waiting for you at home.</p><a className="cat-button cat-button-light" href="/shop">Meet the whole family</a></div><div className="cat-club-image"><img src="/cat-hero.png" alt="The Beata Shop cat characters with their favourite merchandise" /></div></section>
+    <section className="cat-arrivals section-shell"><div className="cat-section-heading"><div><p className="cat-kicker">Fresh from the studio</p><h2>New arrivals</h2></div><a href="/shop?sort=newest">View all <span>→</span></a></div><div className="product-grid">{seedProducts.slice(0, 6).map((product) => <ProductCard product={product} key={product.id} />)}</div></section>
+    <section className="cat-custom section-shell" id="custom-print"><div className="cat-custom-copy"><Paintbrush aria-hidden="true" /><p className="cat-kicker">Custom print</p><h2>Your cat.<br />Your favourite thing.</h2><p>Choose a product, share your idea, and we’ll help turn it into a personal keepsake.</p><a className="cat-button" href="/contact">Start a custom order</a></div><ol className="cat-custom-steps">{printSteps.map(([slug, label], index) => <li key={slug}><ProductArtwork slug={slug} label={label} /><span>{String(index + 1).padStart(2, '0')}</span><p>{label}</p></li>)}</ol></section>
+    <section className="cat-reviews section-shell" aria-labelledby="reviews-title"><div className="cat-review-title"><Heart aria-hidden="true" /><p className="cat-kicker">Kind words from cat people</p><h2 id="reviews-title">Loved almost as much as the cat.</h2></div><div className="cat-review-grid"><blockquote><div>★★★★★</div><p>“The mug has become my morning favourite. The illustration feels so much like our mischievous tabby.”</p><cite>— Sophie, Bristol</cite></blockquote><blockquote><div>★★★★★</div><p>“Beautiful quality, lovely packaging, and the hoodie is genuinely cosy. I’m already eyeing the tote.”</p><cite>— Hannah, Leeds</cite></blockquote><blockquote><div>★★★★★</div><p>“A brilliant gift for the impossible-to-buy-for cat person. It made them grin instantly.”</p><cite>— James, London</cite></blockquote></div></section>
+    <section className="cat-service-strip"><div><PackageCheck aria-hidden="true" /><span><strong>Free UK delivery</strong> on orders over £60</span></div><div><Sparkles aria-hidden="true" /><span><strong>Original artwork</strong> made for cat people</span></div><div><Gift aria-hidden="true" /><span><strong>Gift-ready</strong> thoughtful from box to bow</span></div></section>
+  </main>;
 }

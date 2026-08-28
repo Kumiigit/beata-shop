@@ -18,3 +18,4 @@ export const orderItems = sqliteTable('order_items', {
 
 export const webhookEvents = sqliteTable('webhook_events', { id: text('id').primaryKey(), eventType: text('event_type').notNull(), processedAt: text('processed_at').notNull() });
 export const newsletterSubscribers = sqliteTable('newsletter_subscribers', { email: text('email').primaryKey(), createdAt: text('created_at').notNull() });
+export const contentMigrations = sqliteTable('content_migrations', { id: text('id').primaryKey(), appliedAt: text('applied_at').notNull() });

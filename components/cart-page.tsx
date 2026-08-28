@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { formatGBP } from '@/types/store';
 import { useCart } from './cart-provider';
 import { LogoPlaceholder } from './logo-placeholder';
+import { ProductArtwork } from './product-artwork';
 
 const FREE_DELIVERY = 6000;
 
@@ -39,9 +40,9 @@ export function CartPage() {
       <section className="empty-cart">
         <LogoPlaceholder label="Empty shopping bag" />
         <p className="eyebrow">Your bag</p>
-        <h1>Room for something considered.</h1>
-        <p>Your bag is empty. Explore the collection and find an everyday piece.</p>
-        <a className="button button-dark" href="/shop">Shop all pieces</a>
+        <h1>Room for a little cat magic.</h1>
+        <p>Your bag is empty. Explore the collection and find something made for cat people.</p>
+        <a className="button button-dark" href="/shop">Shop all things cat</a>
       </section>
     );
   }
@@ -49,14 +50,14 @@ export function CartPage() {
   return (
     <section className="cart-layout">
       <div className="cart-lines">
-        <p className="eyebrow">Your bag</p><h1>{items.length} considered {items.length === 1 ? 'piece' : 'pieces'}.</h1>
+        <p className="eyebrow">Your bag</p><h1>{items.length} cat-approved {items.length === 1 ? 'favourite' : 'favourites'}.</h1>
         <div className="delivery-progress">
           <p>{remaining ? `Add ${formatGBP(remaining)} for complimentary UK delivery.` : 'Your order qualifies for complimentary UK delivery.'}</p>
           <div><span style={{ width: `${progress}%` }} /></div>
         </div>
         {items.map((item) => (
           <article className="cart-line" key={item.variantId}>
-            <LogoPlaceholder label={item.name} />
+            <ProductArtwork slug={item.slug} label={`${item.name} product artwork`} />
             <div className="cart-line-copy"><a href={`/shop/${item.slug}`}>{item.name}</a><p>Size {item.size}</p><button type="button" onClick={() => removeItem(item.variantId)}><Trash2 /> Remove</button></div>
             <div className="quantity-control" aria-label={`Quantity for ${item.name}`}>
               <button type="button" aria-label="Decrease quantity" onClick={() => updateQuantity(item.variantId, item.quantity - 1)}><Minus /></button>

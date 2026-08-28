@@ -10,10 +10,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://beata-shop.co';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: 'Beata Shop | Quiet confidence, made for every day', template: '%s | Beata Shop' },
-  description: 'Considered unisex essentials for everyday dressing. Designed with ease, made to be lived in.',
-  openGraph: { title: 'Beata Shop', description: 'Quiet confidence, made for every day.', url: '/', siteName: 'Beata Shop', locale: 'en_GB', type: 'website', images: [{ url: '/og.png', width: 1730, height: 909, alt: 'Beata Shop — Quiet confidence, made for every day.' }] },
-  twitter: { card: 'summary_large_image', title: 'Beata Shop', description: 'Quiet confidence, made for every day.', images: ['/og.png'] },
+  title: { default: 'Beata Shop | Everything for cat people', template: '%s | Beata Shop' },
+  description: 'Original cat-themed clothing, homeware and gifts, designed to make cat people smile.',
+  openGraph: { title: 'Beata Shop', description: 'Everything for cat people.', url: '/', siteName: 'Beata Shop', locale: 'en_GB', type: 'website', images: [{ url: '/og.png', width: 1730, height: 909, alt: 'Beata Shop — Everything for cat people.' }] },
+  twitter: { card: 'summary_large_image', title: 'Beata Shop', description: 'Everything for cat people.', images: ['/og.png'] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -12,15 +12,17 @@ import { LogoPlaceholder } from './logo-placeholder';
 export function ShopClient({
   products,
   initialSort = 'featured',
+  initialCategory = 'all',
 }: {
   products: Product[];
   initialSort?: string;
+  initialCategory?: string;
 }) {
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState(initialCategory);
   const [size, setSize] = useState('all');
   const [availability, setAvailability] = useState('all');
-  const [maxPrice, setMaxPrice] = useState(7000);
+  const [maxPrice, setMaxPrice] = useState(5500);
   const [sort, setSort] = useState(initialSort);
   const categories = [...new Set(products.map((product) => product.category))];
   const sizes = [...new Set(products.flatMap((product) => product.variants.map((variant) => variant.size)))];
@@ -42,7 +44,7 @@ export function ShopClient({
   }, [products, search, category, size, availability, maxPrice, sort]);
 
   function reset() {
-    setSearch(''); setCategory('all'); setSize('all'); setAvailability('all'); setMaxPrice(7000); setSort('featured');
+    setSearch(''); setCategory('all'); setSize('all'); setAvailability('all'); setMaxPrice(5500); setSort('featured');
   }
 
   return (
@@ -68,13 +70,13 @@ export function ShopClient({
           </NativeSelect>
         </label>
         <label className="price-filter">Up to {formatGBP(maxPrice)}
-          <input type="range" min="1800" max="7000" step="100" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} />
+          <input type="range" min="1600" max="5500" step="100" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} />
         </label>
         <button className="filter-reset" type="button" onClick={reset}>Reset filters</button>
       </aside>
       <div className="shop-results">
         <div className="results-toolbar">
-          <p>{filtered.length} {filtered.length === 1 ? 'piece' : 'pieces'}</p>
+          <p>{filtered.length} {filtered.length === 1 ? 'favourite' : 'favourites'}</p>
           <label>Sort by
             <NativeSelect value={sort} onChange={(e) => setSort(e.target.value)}>
               <NativeSelectOption value="featured">Featured</NativeSelectOption>
