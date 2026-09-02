@@ -1,9 +1,8 @@
-import type { CSSProperties } from 'react';
-import { getProductArtworkIndex } from '@/data/products';
+const tones = ['clay', 'ink', 'sage', 'sun', 'blush', 'stone'];
+
+function displayText(label: string) { return label.replace(/\b(Tee|Hoodie|Sweatshirt|Cap|Tote|Long Sleeve)\b/gi, '').trim(); }
 
 export function ProductArtwork({ slug, label, className = '' }: { slug: string; label: string; className?: string }) {
-  const index = getProductArtworkIndex(slug);
-  const column = index % 4;
-  const row = Math.floor(index / 4);
-  return <div className={`product-artwork ${className}`} role="img" aria-label={label}><img src="/cat-products.png" alt="" aria-hidden="true" style={{ left: `${column * -100}%`, top: `${row * -100}%` } as CSSProperties} /></div>;
+  const tone = tones[[...slug].reduce((sum, char) => sum + char.charCodeAt(0), 0) % tones.length];
+  return <div className={`product-artwork text-artwork tone-${tone} ${className}`} role="img" aria-label={`${label}, product image placeholder`}><span className="artwork-mark">Beata Shop</span><strong>{displayText(label)}</strong><small>Wear what you mean</small></div>;
 }

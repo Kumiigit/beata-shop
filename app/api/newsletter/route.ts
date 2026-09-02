@@ -1,10 +1,3 @@
 import { NextResponse } from 'next/server';
-import { ensureDatabase } from '@/db/bootstrap';
-
-export async function POST(request: Request) {
-  const body = await request.json().catch(() => null) as { email?: unknown } | null;
-  const email = typeof body?.email === 'string' ? body.email.trim().toLowerCase() : '';
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) return NextResponse.json({ error: 'Enter a valid email.' }, { status: 400 });
-  try { const db = await ensureDatabase(); await db.prepare('INSERT OR IGNORE INTO newsletter_subscribers (email, created_at) VALUES (?, ?)').bind(email, new Date().toISOString()).run(); return NextResponse.json({ ok: true }); }
-  catch { return NextResponse.json({ error: 'The list is temporarily unavailable.' }, { status: 503 }); }
-}
+import { getDatabase } from '@netlify/database';
+export async function POST(request: Request) { const body = await request.json().catch(() => null) as { email?: unknown } | null; const email = typeof body?.email === 'string' ? body.email.trim().toLowerCase() : ''; if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) return NextResponse.json({ error: 'Enter a valid email.' }, { status: 400 }); if (!process.env.NETLIFY_DB_URL) return NextResponse.json({ ok: true, preview: true }); try { const db = getDatabase(); await db.sql`INSERT INTO newsletter_subscribers (email, created_at) VALUES (${email}, NOW()) ON CONFLICT (email) DO NOTHING`; return NextResponse.json({ ok: true }); } catch { return NextResponse.json({ error: 'The list is temporarily unavailable.' }, { status: 503 }); } }

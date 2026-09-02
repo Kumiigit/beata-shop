@@ -1,4 +1,18 @@
 import type { Metadata } from 'next';
 import { ContentPage } from '@/components/content-page';
+
 export const metadata: Metadata = { title: 'Our story' };
-export default function Page() { return <ContentPage eyebrow="The Beata point of view" title="Made by cat people, for cat people." intro="Beata Shop began with a simple idea: the things we use every day should carry a little of the joy, comfort, and character our cats bring home."><img className="content-feature-image" src="/cat-hero.png" alt="The Beata Shop cat collection" /><h2>Original cats. Real personality.</h2><p>We create playful cat artwork and place it on comfortable clothing, useful homeware, and thoughtful gifts. The collection is warm rather than twee, characterful without shouting, and designed to be enjoyed every day.</p><h2>Small details, big purr-sonality.</h2><p>From a carefully placed illustration to gift-ready packaging, every choice is made to delight someone who knows that cats are never just pets—they are family, supervisors, and occasionally tiny domestic tyrants.</p><blockquote>For homes with fur on every surface and love in every corner.</blockquote></ContentPage>; }
+
+export default function Page() {
+  return <ContentPage eyebrow="The Beata point of view" title="Good clothes should have something to say." intro="Beata Shop makes relaxed everyday clothing with funny, honest text for people who like their wardrobe comfortable and their humour slightly too accurate.">
+    <div className="about-wordmark" role="img" aria-label="Beata Shop logo and original text-design placeholder">
+      <img src="/beata-logo.png" alt="Beata Shop" />
+      <strong>WEAR WHAT<br />YOU MEAN</strong>
+    </div>
+    <h2>Original words. Everyday pieces.</h2>
+    <p>We put sharp one-liners and familiar moods on soft T-shirts, hoodies, sweatshirts, long sleeves and accessories. The result is simple clothing with just enough personality to start a conversation—or end one.</p>
+    <h2>Made to be worn, not saved for later.</h2>
+    <p>Comfortable unisex fits, useful details and clean typography keep every design easy to style. Whether the message is dry, dramatic or deeply relatable, it should still feel like your favourite piece of clothing.</p>
+    <blockquote>Less basic. More you.</blockquote>
+  </ContentPage>;
+}

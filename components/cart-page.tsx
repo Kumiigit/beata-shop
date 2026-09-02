@@ -40,9 +40,9 @@ export function CartPage() {
       <section className="empty-cart">
         <LogoPlaceholder label="Empty shopping bag" />
         <p className="eyebrow">Your bag</p>
-        <h1>Room for a little cat magic.</h1>
-        <p>Your bag is empty. Explore the collection and find something made for cat people.</p>
-        <a className="button button-dark" href="/shop">Shop all things cat</a>
+        <h1>Plenty of room for a good one-liner.</h1>
+        <p>Your bag is empty. Explore the collection and find something that sounds suspiciously like you.</p>
+        <a className="button button-dark" href="/shop">Shop the collection</a>
       </section>
     );
   }
@@ -50,7 +50,7 @@ export function CartPage() {
   return (
     <section className="cart-layout">
       <div className="cart-lines">
-        <p className="eyebrow">Your bag</p><h1>{items.length} cat-approved {items.length === 1 ? 'favourite' : 'favourites'}.</h1>
+        <p className="eyebrow">Your bag</p><h1>{items.length} new {items.length === 1 ? 'favourite' : 'favourites'}.</h1>
         <div className="delivery-progress">
           <p>{remaining ? `Add ${formatGBP(remaining)} for complimentary UK delivery.` : 'Your order qualifies for complimentary UK delivery.'}</p>
           <div><span style={{ width: `${progress}%` }} /></div>
