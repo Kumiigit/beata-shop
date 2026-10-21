@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <radialGradient id="pumpkin"><stop stop-color="#ffc467"/><stop offset=".7" stop-color="#ff8b24"/><stop offset="1" stop-color="#d74d0e"/></radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#ff9b31" flood-opacity=".9"/></filter>
+  </defs>
+  <g filter="url(#glow)">
+    <path d="M23 14Q21 8 26 6L29 8Q24 10 26 15" fill="#88a34a" stroke="#d6e984" stroke-width="1"/>
+    <path d="M24 15C12 9 5 19 8 30C10 39 17 41 24 38C31 41 38 39 40 30C43 19 36 9 24 15Z" fill="url(#pumpkin)" stroke="#ffd58d" stroke-width="1.2"/>
+    <path d="M19 15C13 22 14 33 20 38M29 15C35 22 34 33 28 38M24 15V38" fill="none" stroke="#cd510d" stroke-width="1.2" opacity=".55"/>
+    <path d="M13 25L19 20L21 26ZM27 26L29 20L35 25ZM22 29L24 26L26 29ZM14 30L19 32L21 30L24 33L27 30L29 32L34 30Q31 38 24 36Q17 38 14 30Z" fill="#40201a"/>
+    <path d="M13 25L19 20M29 20L35 25" stroke="#fff2a0" stroke-width=".8"/>
+  </g>
+</svg>

@@ -1,23 +1,64 @@
-import { Gift, PackageCheck, Paintbrush, Shirt, Sparkles, Smile, Tags } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, Gift, ImageIcon, PackageCheck, Paintbrush, RotateCcw, Shirt, ShoppingBag } from 'lucide-react';
 import { ProductArtwork } from '@/components/product-artwork';
 import { ProductCard } from '@/components/product-card';
-import { listProducts } from '@/lib/catalog';
+import { listStorefrontProducts, getStorefrontHomepageMedia } from '@/lib/storefront-catalog';
+import type { HomepageMediaKey } from '@/types/homepage-media';
+import { cookies } from 'next/headers';
+import { HalloweenCobweb } from '@/components/halloween-cobweb';
+import { StoreImage } from '@/components/store-image';
 
-const categoryCards = [
-  { name: 'T-shirts', note: 'Funny, wearable, dangerously relatable', href: '/shop?category=T-shirts', slug: 'probably-tomorrow-tee', icon: Shirt },
-  { name: 'Hoodies', note: 'Comfort with something to say', href: '/shop?category=Hoodies', slug: 'out-of-office-mentally-hoodie', icon: Smile },
-  { name: 'Sweatshirts', note: 'Main-character layers', href: '/shop?category=Sweatshirts', slug: 'main-character-energy-sweatshirt', icon: Tags },
-  { name: 'Accessories', note: 'Small things. Loud opinions.', href: '/shop?category=Accessories', slug: 'social-battery-one-percent-cap', icon: Gift },
+const categories: { name: string; href: string; slug: string; icon: typeof Shirt; slot: HomepageMediaKey }[] = [
+  { name: 'T-shirts', href: '/shop?category=T-shirts', slug: 'probably-tomorrow-tee', icon: Shirt, slot: 'category-tshirts' },
+  { name: 'Hoodies', href: '/shop?category=Hoodies', slug: 'out-of-office-mentally-hoodie', icon: Shirt, slot: 'category-hoodies' },
+  { name: 'Caps & hats', href: '/shop?category=Accessories', slug: 'social-battery-one-percent-cap', icon: Gift, slot: 'category-accessories' },
+  { name: 'Workwear', href: '/workwear', slug: 'workwear', icon: Shirt, slot: 'category-workwear' },
+  { name: 'Mugs', href: '/shop?category=Mugs', slug: 'custom-printed-mug', icon: Gift, slot: 'category-mugs' },
+  { name: 'Bags', href: '/shop?category=Bags', slug: '50-age-is-just-a-number-bag-pouch-set', icon: ShoppingBag, slot: 'category-bags' },
 ];
 
+function BannerPlaceholder({ label, className = '', pl = false }: { label: string; className?: string; pl?: boolean }) {
+  return <figure style={{ margin: 0 }} className={`banner-placeholder ${className}`}  aria-label={`${label} — ${pl ? 'miejsce na zdjęcie' : 'placeholder'}`}><ImageIcon aria-hidden="true" /><span>{label}</span><small>{pl ? 'Dodaj zdjęcie lub grafikę kampanii' : 'Replace with your photo or campaign artwork'}</small></figure>;
+}
+
+function HomepageImage({ url, label, className = '', pl = false }: { url?: string; label: string; className?: string; pl?: boolean }) {
+  const hero = className.includes('store-hero-media');
+  return url ? <div className={`homepage-image ${className}`}><StoreImage src={url} alt={label} width={1200} height={900} sizes={hero ? '(max-width: 760px) 100vw, 65vw' : '(max-width: 540px) 100vw, (max-width: 900px) 50vw, 33vw'} loading={hero ? 'eager' : 'lazy'} fetchPriority={hero ? 'high' : undefined} /></div> : <BannerPlaceholder label={label} className={className} pl={pl} />;
+}
+
 export default async function Home() {
-  const products = await listProducts();
-  return <main className="cat-home">
-    <section className="cat-hero word-hero"><div className="cat-hero-shade" /><div className="cat-hero-copy"><p className="cat-kicker">Clothes with excellent timing</p><h1>Wear something<br /><em>worth reading.</em></h1><p>Funny text, comfortable fits, and everyday clothes for people with opinions, excuses, and a very specific sense of humour.</p><div className="cat-hero-actions"><a className="cat-button" href="/shop">Shop the collection</a><a className="cat-link" href="#new-arrivals">See what’s new <span>→</span></a></div><div className="cat-trust"><span>Original text designs</span><span>Unisex fits</span><span>UK delivery</span></div></div><div className="word-hero-art"><img src="/beata-logo.png" alt="Beata Shop" /><div className="floating-slogan slogan-one">OUT OF OFFICE<br />MENTALLY</div><div className="floating-slogan slogan-two">PROBABLY<br />TOMORROW</div><div className="floating-slogan slogan-three">SOCIAL<br />BATTERY: 1%</div></div></section>
-    <section className="cat-categories section-shell" aria-labelledby="category-title"><div className="cat-section-heading"><div><p className="cat-kicker">Pick your mood</p><h2 id="category-title">Good clothes. Better one-liners.</h2></div><a href="/shop">View everything <span>→</span></a></div><div className="cat-category-grid">{categoryCards.map(({ name, note, href, slug, icon: Icon }) => <a href={href} key={name}><ProductArtwork slug={slug} label={name} /><div className="cat-category-copy"><Icon aria-hidden="true" /><div><h3>{name}</h3><p>{note}</p></div><span>→</span></div></a>)}</div></section>
-    <section className="cat-club statement-section"><div className="cat-club-copy"><p className="cat-kicker">The Beata point of view</p><h2>Less basic.<br />More you.</h2><p>We make clothes that say the quiet part out loud—printed on soft, useful pieces you’ll actually want to wear.</p><a className="cat-button cat-button-light" href="/shop">Find your new favourite</a></div><div className="statement-wall"><span>I NEED A NAP</span><span>MAIN CHARACTER ENERGY</span><span>GOOD THINGS TAKE SNACKS</span><img src="/beata-logo.png" alt="Beata Shop" /></div></section>
-    <section className="cat-arrivals section-shell" id="new-arrivals"><div className="cat-section-heading"><div><p className="cat-kicker">Freshly printed</p><h2>New arrivals</h2></div><a href="/shop?sort=newest">View all <span>→</span></a></div><div className="product-grid">{products.slice(0, 6).map((product) => <ProductCard product={product} key={product.id} />)}</div></section>
-    <section className="cat-custom section-shell" id="custom-print"><div className="cat-custom-copy"><Paintbrush aria-hidden="true" /><p className="cat-kicker">Custom print</p><h2>Your words.<br />Your wardrobe.</h2><p>Have a line that belongs on a shirt? Tell us the idea and we’ll help turn it into something wearable.</p><a className="cat-button" href="/contact">Start a custom order</a></div><div className="custom-copy-wall"><strong>YOUR<br />TEXT<br />HERE</strong><img src="/beata-logo.png" alt="Beata Shop logo placeholder for custom product artwork" /></div></section>
-    <section className="cat-service-strip"><div><PackageCheck aria-hidden="true" /><span><strong>Free UK delivery</strong> on orders over £60</span></div><div><Sparkles aria-hidden="true" /><span><strong>Original designs</strong> printed with care</span></div><div><Gift aria-hidden="true" /><span><strong>Gift-ready</strong> for funny people you tolerate</span></div></section>
+  const isPolish = (await cookies()).get('beata_language')?.value === 'pl';
+  const [products, media] = await Promise.all([listStorefrontProducts(), getStorefrontHomepageMedia()]);
+  return <main className="store-home halloween-home">
+    <section className="store-hero halloween-hero">
+      <HomepageImage url="/halloween/home-hero.webp" label={isPolish ? 'Bluza Take a Deep Breath Bro, kubek Too Cool to Haunt i T-shirt Trick-or-Treat Ghost Dogs z kolekcji Halloween Beata Shop' : 'Beata Shop Halloween collection: Take a Deep Breath Bro hoodie, Too Cool to Haunt mug and Trick-or-Treat Ghost Dogs T-shirt'} className="store-hero-media" pl={isPolish} />
+      <HalloweenCobweb className="halloween-web-left" />
+      <HalloweenCobweb className="halloween-web-right" />
+      <div className="store-hero-copy"><p className="store-kicker">{isPolish ? 'Czas na Halloween' : 'A little spooky. A lot of you.'}</p><h1>{isPolish ? <>Twój styl.<br /><em>Duch Halloween.</em></> : <>Get into<br />the <em>spirit.</em></>}</h1><p>{isPolish ? 'Przytulne bluzy, upiornie dobre T-shirty i kubki pełne charakteru. Odkryj swoje ulubione wzory na Halloween.' : 'Cosy hoodies, hauntingly good tees and mugs with a mischievous side. Find your favourites for spooky season.'}</p><Link prefetch={false} className="store-button" href="/shop?q=halloween">{isPolish ? 'Odkryj Halloween' : 'Shop Halloween'} <ArrowRight aria-hidden="true" /></Link><span className="halloween-hero-note">{isPolish ? 'Twoje ulubione produkty. W upiornym wydaniu.' : 'All treats. A few tricks.'}</span></div>
+    </section>
+
+    <section className="store-categories store-shell" aria-labelledby="category-heading">
+      <div className="store-section-heading"><div><p className="store-kicker">{isPolish ? 'Kupuj po swojemu' : 'Shop your way'}</p><h2 id="category-heading">{isPolish ? 'Przeglądaj kategorie' : 'Browse categories'}</h2></div><Link prefetch={false} href="/shop">{isPolish ? 'Zobacz wszystko' : 'View all'} <ArrowRight aria-hidden="true" /></Link></div>
+      <div className="store-category-grid">{categories.map(({ name, href, slug, icon: Icon, slot }, index) => { const displayName = isPolish ? ['T-shirty', 'Bluzy', 'Czapki', 'Odzież robocza', 'Kubki', 'Torby'][index] : name; return <Link prefetch={false} href={href} className={`store-category-card${slot === 'category-workwear' ? ' store-category-card--workwear' : ''}`} key={name}>{media[slot] ? <HomepageImage url={media[slot]} label={isPolish ? `Kolekcja: ${displayName}` : `${displayName} collection`} pl={isPolish} /> : <ProductArtwork slug={slug} label={displayName} />}<span><Icon aria-hidden="true" />{displayName}</span></Link>; })}</div>
+    </section>
+
+    <section className="store-feature" id="special-edition">
+      <div className="store-feature-copy"><p className="store-kicker">{isPolish ? 'Kolekcja limitowana' : 'Limited collection'}</p><h2>{isPolish ? 'Wyjątkowa kolekcja w Twoim stylu.' : 'A special drop, made your way.'}</h2><p>{isPolish ? 'Odkryj sezonowe kolekcje, współprace i nasze najpopularniejsze wzory.' : 'Use this space for a seasonal collection, collaboration or bestselling design range.'}</p><Link prefetch={false} className="store-button" href="/shop?sort=newest">{isPolish ? 'Zobacz kolekcję' : 'Explore the collection'} <ArrowRight aria-hidden="true" /></Link></div>
+      <HomepageImage url={media['special-drop']} label={isPolish ? 'Kolekcja edycji specjalnej' : 'Special-edition collection'} pl={isPolish} />
+    </section>
+
+    <section className="store-arrivals store-shell" id="new-arrivals">
+      <div className="store-section-heading"><div><p className="store-kicker">{isPolish ? 'Świeżo dodane' : 'Fresh picks'}</p><h2>{isPolish ? 'Nowości' : 'New arrivals'}</h2></div><Link prefetch={false} href="/shop?sort=newest">{isPolish ? 'Zobacz wszystko' : 'View all'} <ArrowRight aria-hidden="true" /></Link></div>
+      <div className="product-grid store-product-grid">{products.slice(0, 6).map((product) => <ProductCard product={product} key={product.id} />)}</div>
+    </section>
+
+    <section className="store-custom">
+      <div className="store-custom-copy"><Paintbrush aria-hidden="true" /><p className="store-kicker">{isPolish ? 'Własny nadruk · od £2' : 'Custom print · from £2'}</p><h2>{isPolish ? 'Twój projekt, ułożony po Twojemu.' : 'Your design, placed your way.'}</h2><p>{isPolish ? 'Wybierz Logo, A4, A3 lub wszystkie trzy, prześlij grafikę i ustaw jej położenie przed złożeniem zamówienia.' : 'Choose Logo, A4, A3, or all three, upload your artwork, and position it before checkout.'}</p><Link prefetch={false} className="store-button" href="/custom-print">{isPolish ? 'Stwórz swój projekt' : 'Create yours'} <ArrowRight aria-hidden="true" /></Link></div>
+      <div className="store-custom-steps">{(isPolish ? ['Wybierz produkt', 'Prześlij grafikę', 'Zatwierdź wizualizację', 'My drukujemy'] : ['Choose a product', 'Upload your artwork', 'Approve your proof', 'We print it']).map((step, index) => { const slot = (['custom-choose','custom-upload','custom-proof','custom-print'] as HomepageMediaKey[])[index]; return <div key={step}>{media[slot] ? <HomepageImage url={media[slot]} label={step} pl={isPolish} /> : <ProductArtwork slug={index === 1 ? 'out-of-office-mentally-hoodie' : index === 2 ? 'social-battery-one-percent-cap' : 'probably-tomorrow-tee'} label={step} />}<span>{index + 1}</span><p>{step}</p></div>; })}</div>
+    </section>
+
+    <section className="store-inspiration store-shell"><div className="store-section-heading"><div><p className="store-kicker">{isPolish ? 'Miejsce na Twoje pomysły' : 'Your ideas here'}</p><h2>{isPolish ? 'Zrób to po swojemu' : 'Make it yours'}</h2></div></div><div className="store-inspiration-grid">{(isPolish ? ['Wyrazisty tekst', 'Natura', 'Podróże', 'Ilustracja', 'Minimalizm', 'Coś osobistego'] : ['Bold type', 'Nature', 'Travel', 'Illustration', 'Minimal', 'Something personal']).map((item, index) => { const slot = (['inspiration-bold','inspiration-nature','inspiration-travel','inspiration-illustration','inspiration-minimal','inspiration-personal'] as HomepageMediaKey[])[index]; return <HomepageImage url={media[slot]} label={item} key={item} pl={isPolish} />; })}</div></section>
+
+    <section className="store-service-strip" aria-label={isPolish ? 'Informacje o zakupach' : 'Shopping information'}><div><PackageCheck aria-hidden="true" /><span><strong>{isPolish ? 'Dostawa InPost' : 'InPost delivery'}</strong>{isPolish ? '£3 lub bezpłatnie od £60' : '£3 or free over £60'}</span></div><div><RotateCcw aria-hidden="true" /><span><strong>{isPolish ? '30 dni na zwrot' : '30-day returns'}</strong>{isPolish ? 'Dla produktów objętych zwrotem' : 'On eligible items'}</span></div><div><Gift aria-hidden="true" /><span><strong>{isPolish ? 'Potrzebujesz pomocy?' : 'Need help?'}</strong>{isPolish ? 'Pon.–sob., 9:00–17:00' : 'Mon–Sat, 9am–5pm'}</span></div></section>
   </main>;
 }

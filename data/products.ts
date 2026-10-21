@@ -1,4 +1,5 @@
 import type { Product, ProductVariant } from '@/types/store';
+import { listProductCategories } from '@/lib/product-categories';
 
 const CLOTHING_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 function variants(productId: string, prefix: string, sizes = CLOTHING_SIZES): ProductVariant[] {
@@ -16,6 +17,6 @@ export const seedProducts: Product[] = [
   { id: 'plot-twist-long-sleeve', slug: 'plot-twist-long-sleeve', name: 'Plot Twist Long Sleeve', category: 'Long sleeves', pricePence: 3400, description: 'A soft long sleeve for days that refuse to follow the outline.', featured: false, active: true, createdAt: '2026-08-25T09:00:00.000Z', details: ['Midweight cotton', 'Relaxed unisex fit', 'Sleeve and chest print'], variants: variants('plot-twist-long-sleeve', 'PTL') },
 ];
 
-export const categories = [...new Set(seedProducts.map((product) => product.category))];
+export const categories = listProductCategories(seedProducts);
 export const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'One size'];
 export function findSeedProduct(slug: string) { return seedProducts.find((product) => product.slug === slug && product.active); }

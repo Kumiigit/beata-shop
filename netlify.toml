@@ -4,6 +4,10 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  NEXT_PUBLIC_NETLIFY_IMAGE_CDN = "true"
+
+[functions]
+  included_files = ["certs/supabase-prod-ca-2021.crt"]
 
 [dev]
   command = "npm run dev"

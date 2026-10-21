@@ -28,6 +28,7 @@ yarn-error.log*
 
 # local environment
 .env*
+data/product-images/
 !.env.example
 
 # deployment and generated files
@@ -40,3 +41,10 @@ next-env.d.ts
 /work/
 /data/local-inventory.json
 /.netlify/
+/.npm-cache/
+data/local-collections.json
+data/local-homepage-media.json
+
+# Local verification artifacts
+/output/
+/listing-proof/

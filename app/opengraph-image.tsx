@@ -1,3 +1,4 @@
+/* oxlint-disable next/no-img-element -- ImageResponse generates a PNG with Satori, which requires native img elements. */
 import { ImageResponse } from 'next/og';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';

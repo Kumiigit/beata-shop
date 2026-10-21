@@ -1,0 +1,220 @@
+/* Seasonal storefront styling; product, checkout and admin behaviour stays intact. */
+.halloween-topbar { background: #251a20; color: #fff0dc; border-bottom: 2px solid #da762e; }
+.halloween-header { background: #fff8ef; border-bottom-color: #edc7a0; }
+.halloween-header nav a:hover { color: #ac491b; }
+.halloween-header .header-actions strong { background: #bb501c; }
+.halloween-home { --gold: #a94619; --line: #e7c5a5; background: #fff7ec; }
+.halloween-hero { position: relative; isolation: isolate; overflow: hidden; background: #261b21; grid-template-columns: 37% 63%; }
+.halloween-hero .store-hero-copy { padding: clamp(48px, 5.3vw, 80px); color: #fff5e6; }
+.halloween-hero .store-kicker { color: #ffc17c; font-size: 10px; letter-spacing: .16em; }
+.halloween-hero .store-hero-copy h1 { font-size: clamp(58px, 6.4vw, 96px); line-height: .95; font-weight: 600; }
+.halloween-hero h1 em { color: #ffa454; font-weight: 500; }
+.halloween-hero .store-hero-copy > p:not(.store-kicker) { color: #e4cfc3; font-size: 14px; }
+.halloween-hero .store-button { background: #f39a49; border-color: #f39a49; color: #251a20; border-radius: 5px; }
+.halloween-hero .store-button:hover { background: #ffb96f; border-color: #ffb96f; }
+.halloween-hero .store-hero-media { border: 0; background: radial-gradient(ellipse at center, #a45023, #502719); }
+.halloween-hero .store-hero-media img { object-fit: contain; object-position: center; }
+.halloween-hero-note { display: block; margin-top: 17px; color: #c4aa9e; font-size: 10px; letter-spacing: .055em; }
+.halloween-cobweb { position: absolute; width: clamp(85px, 12vw, 175px); height: auto; color: #f7dfc7; opacity: .35; pointer-events: none; z-index: 2; }
+.halloween-web-left { top: 0; left: 0; }
+.halloween-web-right { top: 0; right: 0; transform: scaleX(-1); }
+.halloween-home .store-categories { background: #fff5e6; }
+.halloween-home .store-category-card { outline: 1px solid #e8c5a0; }
+.halloween-home .store-category-card > span { background: rgba(38,27,33,.93); }
+.halloween-home .store-feature { background: #f4d2a9; border-block-color: #e5b381; }
+.halloween-home .store-custom { background: #f2dcc2; }
+.halloween-home .store-service-strip { background: #261b21; }
+.halloween-home .store-service-strip svg { color: #ffaf64; }
+.halloween-home .store-section-heading > a { color: #9c431e; }
+.halloween-home .store-button:not(.halloween-hero .store-button) { background: #9d431d; border-color: #9d431d; }
+.halloween-home .store-button:not(.halloween-hero .store-button):hover { background: #7b3217; }
+@media (max-width: 900px) {
+  .halloween-hero { grid-template-columns: minmax(0, 1fr); }
+  .halloween-hero .store-hero-copy { background: #261b21; padding: 40px 26px; }
+  .halloween-hero .store-hero-copy h1 { font-size: clamp(58px, 13vw, 80px); }
+  .halloween-hero .store-hero-media { min-height: 0; }
+  .halloween-hero .store-hero-media img { width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }
+  .halloween-web-left { top: auto; bottom: 0; transform: scaleY(-1); width: 85px; opacity: .18; }
+}
+
+/* Apply the same seasonal palette across every customer-facing route. */
+:is(.store-home, .shop-page, .product-page, .content-page, .result-page, .custom-print-page, .workwear-page, .proof-page, .cart-layout, .empty-cart, .halloween-header, .mobile-navigation, .site-footer) {
+  --ivory: #20171c;
+  --paper: #291e24;
+  --blush: #38272b;
+  --muted: #d2bdb0;
+  --gold: #ffad63;
+  --line: #624332;
+  --background: #20171c;
+  --foreground: #fff0df;
+  --card: #291e24;
+  --card-foreground: #fff0df;
+  --primary: #f49b4c;
+  --primary-foreground: #251a20;
+  --secondary: #38272b;
+  --secondary-foreground: #fff0df;
+  --muted-foreground: #d2bdb0;
+  --border: #624332;
+  --input: #795339;
+  --ring: #ffad63;
+  color: #fff0df;
+}
+body:has(:is(.store-home, .shop-page, .product-page, .content-page, .result-page, .custom-print-page, .workwear-page, .proof-page, .cart-layout, .empty-cart)) { background: #20171c; }
+:is(.store-home, .shop-page, .product-page, .content-page, .result-page, .custom-print-page, .workwear-page, .proof-page, .cart-layout, .empty-cart) {
+  position: relative;
+  isolation: isolate;
+  background-color: #20171c;
+}
+:is(.shop-page, .product-page, .content-page, .result-page, .custom-print-page, .workwear-page, .proof-page, .cart-layout, .empty-cart)::before,
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(95px, 14vw, 180px);
+  aspect-ratio: 1;
+  background: url('/halloween/cobweb.svg') center / contain no-repeat;
+  transform: scaleX(-1);
+  opacity: .23;
+  pointer-events: none;
+  z-index: 1;
+}
+.halloween-header { background: #261b21; border-bottom: 1px solid #734a30; color: #fff0df; }
+.halloween-header .brand img, .site-footer .footer-brand img { filter: invert(1); }
+.halloween-header nav a:hover { color: #ffad63; }
+.halloween-header .search-pill, .halloween-header .header-search-form input { color: #fff0df; }
+.halloween-header .header-search-form input::placeholder { color: #d2bdb0; }
+.halloween-header .header-actions strong { background: #ffad63; color: #251a20; }
+.mobile-navigation { background: #261b21; border-color: #624332; }
+.mobile-navigation a { border-color: #624332; }
+.mobile-navigation .mobile-search-form { background: #39272b; border-color: #795339; }
+.mobile-navigation .mobile-search-form input { color: #fff0df; }
+.halloween-season-ribbon { display: flex; justify-content: center; align-items: center; gap: 13px; min-height: 34px; padding: 7px 16px; background: #a9471a; color: #fff6e8; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.halloween-season-ribbon svg { width: 16px; height: 16px; }
+.site-footer { position: relative; background: #181216; border-top: 1px solid #795339; }
+.site-footer .footer-bottom { border-color: #624332; }
+.site-footer .footer-links a:hover { color: #ffad63; }
+.site-footer .footer-contact a { border-color: #795339; }
+.site-footer .footer-cookie-settings { color: #d2bdb0; }
+.halloween-home :is(.store-categories, .store-arrivals, .store-inspiration) { background: #20171c; }
+.halloween-home .store-feature { background: #332229; border-color: #624332; }
+.halloween-home .store-custom { background: #291e24; }
+.halloween-home .store-section-heading > a { color: #ffad63; }
+.halloween-home .store-category-card { outline-color: #795339; }
+.halloween-home .store-category-card > span { background: #261b21eb; border: 1px solid #795339; }
+.halloween-home .banner-placeholder { background: repeating-linear-gradient(135deg, #39272b 0 14px, #332329 14px 28px); border-color: #795339; color: #edc4a2; }
+.halloween-home .shop-image-placeholder { background: #38272b; color: #edc4a2; border-color: #795339; }
+.halloween-home .store-custom-steps > div > span { background: #f49b4c; color: #251a20; }
+.halloween-home .store-custom-copy > svg { color: #ffad63; }
+.halloween-home .store-button:not(.halloween-hero .store-button),
+:is(.shop-page, .product-page, .cart-layout, .empty-cart, .content-page, .result-page, .custom-print-page, .workwear-page, .proof-page) :is(.button-dark, .store-button, .shop-button) {
+  background: #f49b4c !important;
+  border-color: #f49b4c;
+  color: #251a20 !important;
+}
+.halloween-home .store-button:not(.halloween-hero .store-button):hover,
+:is(.shop-page, .product-page, .cart-layout, .empty-cart, .content-page, .result-page, .custom-print-page, .workwear-page, .proof-page) :is(.button-dark, .store-button, .shop-button):hover { background: #ffb875 !important; }
+.shop-page .page-hero, .content-page > header, .workwear-page .workwear-heading { background: radial-gradient(ellipse at top, #513022, #261b21 70%); }
+.shop-page .filters { background: #2d2026; border-top: 3px solid #f49b4c; }
+.shop-page :is(.filters, .results-toolbar) :is(input, select) { color: #fff0df; background-color: #38272b; }
+.shop-page .filters input[type='range'] { accent-color: #ffad63; }
+.shop-page .product-card { border-bottom: 1px solid #624332; padding-bottom: 16px; }
+.shop-page .catalogue-category > h2 { color: #ffad63; }
+.shop-page .workwear-shop-link { background: #38272b; border-color: #795339; }
+.content-page .about-wordmark { background: #63331f; }
+:is(.empty-cart, .content-page, .result-page) .logo-placeholder img { filter: invert(1); }
+:is(.empty-cart, .content-page, .result-page) .logo-placeholder span { color: #d2bdb0; }
+.product-page .made-to-order-note { background: #38272b; }
+.product-page :is(.product-info summary, .custom-print-invite a) { color: #fff0df; }
+.product-page .size-picker label input:checked + span { background: #f49b4c; border-color: #f49b4c; color: #251a20; }
+.product-page .compact-gallery-thumbnails button[aria-pressed='true'] { border-color: #e47f33; }
+.product-page .quantity-row select { color: #fff0df; }
+.cart-layout .order-summary { border-top: 3px solid #f49b4c; }
+.cart-layout .order-summary .order-total { color: #fff0df; }
+.cart-layout .checkout-error { color: #ffb4a2; }
+.custom-print-page :is(.print-option, .custom-static-choice strong) { background: #38272b; }
+.custom-print-page .custom-builder select { color: #fff0df; background: #38272b; }
+.custom-print-page .custom-section-heading > span { background: #f49b4c; color: #251a20; }
+.custom-print-page .custom-process { background: #34232a; border-top: 3px solid #f49b4c; }
+.custom-print-page .preview-side-switch { background: #38272b; }
+.custom-print-page .preview-side-switch button.is-active { background: #f49b4c; color: #251a20; }
+.custom-print-page :is(.garment-preview-placeholder, .artwork-preview span) { color: #594436; }
+.workwear-page .workwear-card { background: #291e24; border-color: #795339; }
+.workwear-page.workwear-page { background: #20171c; }
+.workwear-page .workwear-card.is-selected { border-color: #f49b4c; box-shadow: 0 0 0 1px #f49b4c; }
+.workwear-page :is(.workwear-heading h1 em, .workwear-steps span) { color: #ffad63; }
+.workwear-page :is(.workwear-heading > p:not(.store-kicker), .workwear-section-title > p, .workwear-details section > p:not(.store-kicker), .workwear-card-body > p, .workwear-note, .workwear-upload span) { color: #d2bdb0; }
+.workwear-page :is(.workwear-upload, .workwear-shop-link) { background: #38272b; border-color: #795339; }
+.workwear-page :is(.workwear-enquiry input, .workwear-enquiry textarea, .workwear-quantity input) { color: #251a20; }
+.workwear-page .workwear-select input { accent-color: #f49b4c; }
+@media (max-width: 600px) {
+  .halloween-season-ribbon { font-size: 9px; letter-spacing: .08em; }
+  :is(.shop-page, .product-page, .content-page, .custom-print-page, .workwear-page, .cart-layout, .empty-cart)::before { width: 90px; opacity: .17; }
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  body:has(:is(.store-home, .shop-page, .product-page, .content-page, .result-page, .custom-print-page, .workwear-page, .proof-page, .cart-layout, .empty-cart)),
+  body:has(:is(.store-home, .shop-page, .product-page, .content-page, .result-page, .custom-print-page, .workwear-page, .proof-page, .cart-layout, .empty-cart)) * {
+    cursor: url('/halloween/pumpkin-cursor.svg') 24 24, auto;
+  }
+  body:has(:is(.store-home, .shop-page, .product-page, .content-page, .result-page, .custom-print-page, .workwear-page, .proof-page, .cart-layout, .empty-cart)) :is(a, button, label, select, summary, input[type='checkbox'], input[type='radio']) {
+    cursor: url('/halloween/pumpkin-cursor.svg') 24 24, pointer;
+  }
+}
+
+/* Scattered ornaments stay at section edges and never intercept clicks. */
+.halloween-home :is(.store-categories, .store-feature, .store-arrivals, .store-custom, .store-inspiration),
+.shop-page .shop-surface, .product-page .related-products { position: relative; isolation: isolate; }
+.halloween-home :is(.store-categories, .store-feature, .store-arrivals, .store-custom, .store-inspiration)::before,
+.shop-page .shop-surface::before, .product-page .related-products::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(75px, 10vw, 135px);
+  aspect-ratio: 1;
+  background: url('/halloween/cobweb.svg') center / contain no-repeat;
+  transform: scaleX(-1);
+  opacity: .25;
+  pointer-events: none;
+}
+.halloween-home :is(.store-feature, .store-custom)::before,
+.shop-page .shop-surface::before {
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  transform: scaleY(-1);
+}
+.halloween-home :is(.store-categories, .store-arrivals, .store-custom, .store-inspiration)::after,
+.shop-page .page-hero::after,
+.content-page > header::after,
+.workwear-page .workwear-heading::after,
+:is(.product-page, .custom-print-page, .proof-page, .cart-layout, .empty-cart, .result-page)::after,
+.site-footer::after {
+  content: '';
+  position: absolute;
+  right: clamp(14px, 3vw, 44px);
+  bottom: 18px;
+  width: clamp(65px, 8vw, 115px);
+  aspect-ratio: 1;
+  background: url('/halloween/pumpkin-decoration.svg') center / contain no-repeat;
+  transform: rotate(12deg);
+  opacity: .18;
+  pointer-events: none;
+}
+.shop-page .page-hero, .content-page > header, .workwear-page .workwear-heading { position: relative; }
+.halloween-home :is(.store-categories, .store-custom)::after,
+:is(.custom-print-page, .empty-cart)::after {
+  right: auto;
+  left: clamp(14px, 3vw, 44px);
+  transform: rotate(-14deg);
+}
+.halloween-home .store-inspiration::after { bottom: auto; top: 20px; }
+.site-footer::after { bottom: 65px; opacity: .12; width: 85px; }
+@media (max-width: 600px) {
+  .halloween-home :is(.store-categories, .store-feature, .store-arrivals, .store-custom, .store-inspiration)::before { width: 75px; opacity: .19; }
+  .halloween-home :is(.store-categories, .store-arrivals, .store-custom)::after { width: 60px; bottom: 6px; opacity: .14; }
+  :is(.product-page, .custom-print-page, .proof-page, .cart-layout, .empty-cart, .result-page)::after,
+  .site-footer::after { opacity: .1; width: 65px; }
+}

@@ -1,0 +1,18 @@
+.mug-editor { display: grid; gap: 1.5rem; min-width: 0; }
+.mug-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+.mug-add-text { display: flex; align-items: end; gap: .5rem; }
+.mug-editor label { display: grid; gap: .4rem; min-width: 0; }
+.mug-editor .rights-check { display: flex; }
+.mug-editor input:not([type=checkbox]):not([type=range]), .mug-editor select { width: 100%; min-width: 0; }
+.mug-editor button:not(.shop-button) { border: 1px solid #bca797; padding: .55rem .7rem; border-radius: .4rem; background: #fffaf5; color: #493b33; font: inherit; cursor: pointer; }
+.mug-editor button:disabled { opacity: .5; cursor: default; }
+.mug-wrap-note { font-size: .82rem; line-height: 1.6; margin: .8rem 0; }
+.mug-wrap-labels { display: grid; grid-template-columns: 1fr 1fr; text-align: center; font-size: .75rem; letter-spacing: .1em; padding: .5rem; }
+.mug-wrap-canvas { width: 100%; display: block; background: white; border: 1px solid #bca797; touch-action: none; user-select: none; }
+.mug-wrap-canvas g { cursor: grab; }
+.mug-layer-controls { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin-top: 1rem; }
+.mug-fit-buttons { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .5rem; }
+.mug-curved-preview { background: #f2e8df; border-radius: .6rem; margin-top: .8rem; overflow: hidden; }
+.mug-curved-preview canvas { width: 100%; display: block; height: auto; }
+@media (max-width: 600px) { .mug-tools { grid-template-columns: 1fr; } .mug-add-text { flex-wrap: wrap; } .mug-add-text label { flex: 1; } .mug-fit-buttons button { flex: 1 1 40%; } }
+.mug-wrap-canvas .mug-resize-handle { cursor: nwse-resize; }

@@ -1,0 +1,72 @@
+.workwear-page { background: #fffaf5; }
+.workwear-heading { padding: 68px 24px 42px; text-align: center; background: #f1dfcf; border-bottom: 1px solid var(--line); }
+.workwear-heading h1 { margin: 18px 0 24px; font-size: clamp(54px, 7vw, 88px); line-height: .95; letter-spacing: -.04em; }
+.workwear-heading h1 em { color: #97603d; font-weight: 400; }
+.workwear-heading > p:not(.store-kicker) { max-width: 660px; margin: 0 auto; color: #665247; font-size: 15px; line-height: 1.8; }
+.workwear-heading > .workwear-branding { margin-top: 18px; font-weight: 700; }
+.workwear-steps { display: flex; justify-content: center; gap: 40px; list-style: none; padding: 0; margin: 36px 0 0; font-size: 12px; font-weight: 700; }
+.workwear-steps li { display: flex; align-items: center; gap: 10px; }
+.workwear-steps span { color: #97603d; font-size: 10px; }
+.workwear-form { max-width: 1400px; margin: 0 auto; padding: 56px clamp(20px, 5vw, 72px) 80px; }
+.workwear-section-title { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 26px; }
+.workwear-page h2 { font-size: clamp(34px, 4vw, 48px); line-height: 1.05; margin: 0 0 12px; }
+.workwear-section-title > p, .workwear-details section > p:not(.store-kicker) { color: #756257; font-size: 13px; line-height: 1.7; }
+.workwear-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.workwear-card { border: 1px solid #dfcec0; border-radius: 12px; overflow: hidden; background: #fffaf5; transition: border-color .2s, box-shadow .2s; }
+.workwear-card.is-selected { border-color: #97603d; box-shadow: 0 0 0 1px #97603d; }
+.workwear-product-image { position: relative; aspect-ratio: 1; background: #f7f0e8; }
+.workwear-product-image > img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.workwear-logo { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.workwear-logo img { width: 100%; height: 100%; object-fit: contain; }
+.workwear-logo > span { white-space: pre-line; text-align: center; font: 700 clamp(7px, .8vw, 11px)/1.2 var(--body); color: white; border: 1px dashed #ffffffa6; padding: 7px; }
+.workwear-card:nth-child(2) .workwear-logo > span, .workwear-card:nth-child(4) .workwear-logo > span { color: #28352f; border-color: #28352f80; }
+.workwear-selected { position: absolute; top: 12px; left: 12px; display: flex; align-items: center; gap: 6px; padding: 7px 10px; background: #24130d; color: white; border-radius: 20px; font-size: 10px; }
+.workwear-card-body { padding: 22px; }
+.workwear-card h3 { font-size: 30px; margin: 0 0 9px; line-height: 1.1; }
+.workwear-card-body > p { color: #756257; font-size: 12px; min-height: 36px; line-height: 1.6; }
+.workwear-select { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 12px; cursor: pointer; padding: 16px 0 4px; }
+.workwear-select input { width: 20px; height: 20px; accent-color: #97603d; }
+.workwear-quantity { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; font-size: 11px; }
+.workwear-quantity input { width: 90px; min-height: 42px; background: white; border: 1px solid #cfb7a7; border-radius: 5px; padding: 8px; }
+.workwear-note { color: #756257; font-size: 11px; line-height: 1.7; margin-top: 16px; }
+.workwear-details { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 70px); margin-top: 48px; border-top: 1px solid #dfcec0; padding-top: 40px; }
+.workwear-upload { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 160px; padding: 24px; margin-top: 22px; border: 1px dashed #a77e60; background: #f6ebdf; border-radius: 10px; cursor: pointer; text-align: center; }
+.workwear-upload strong { font-size: 13px; overflow-wrap: anywhere; }
+.workwear-upload span { color: #756257; font-size: 11px; }
+.workwear-upload input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.workwear-upload:focus-within { outline: 2px solid #97603d; outline-offset: 4px; }
+.workwear-secondary { display: inline-flex; align-items: center; gap: 9px; padding: 12px 18px; min-height: 44px; border: 1px solid #a77e60; border-radius: 6px; font-size: 12px; font-weight: 700; margin-top: 12px; }
+.workwear-text-button { display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 0; text-decoration: underline; text-underline-offset: 4px; font-size: 12px; }
+.workwear-page button:disabled { opacity: .45; cursor: not-allowed; }
+.workwear-enquiry > label { display: grid; gap: 8px; margin: 20px 0; font-size: 12px; font-weight: 700; }
+.workwear-enquiry input, .workwear-enquiry textarea { width: 100%; padding: 12px; border: 1px solid #cfb7a7; border-radius: 6px; background: white; font-size: 14px; font-weight: 400; }
+.workwear-enquiry textarea { resize: vertical; }
+.workwear-summary { list-style: none; padding: 12px 0; border-block: 1px solid #dfcec0; margin: 20px 0; }
+.workwear-summary li { display: flex; justify-content: space-between; gap: 15px; padding: 6px 0; font-size: 12px; }
+.workwear-enquiry .store-button { margin-top: 16px; min-height: 48px; }
+.workwear-status { display: block; font-size: 12px; line-height: 1.7; }
+.workwear-error { color: #9f3131; font-size: 12px; }
+.workwear-contact { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 18px; font-size: 12px; font-weight: 700; overflow-wrap: anywhere; }
+.workwear-contact a { text-decoration: underline; text-underline-offset: 4px; }
+.workwear-shop-link { display: block; margin-top: 32px; padding: 24px; border: 1px solid #dfcec0; border-radius: 8px; background: #f1dfcf; }
+.workwear-shop-link strong { display: block; font-family: var(--display); font-size: 32px; }
+.workwear-shop-link span { display: block; margin-top: 8px; font-size: 13px; }
+@media (max-width: 900px) {
+  .workwear-card-body { padding: 16px; }
+  .workwear-grid { gap: 14px; }
+  .workwear-card h3 { font-size: 25px; }
+}
+@media (max-width: 680px) {
+  .workwear-heading { padding: 44px 22px 30px; text-align: left; }
+  .workwear-heading h1 { font-size: clamp(50px, 12vw, 66px); }
+  .workwear-steps { flex-direction: column; gap: 14px; margin-top: 24px; }
+  .workwear-section-title { display: block; }
+  .workwear-form { padding-top: 36px; }
+  .workwear-grid, .workwear-details { grid-template-columns: minmax(0, 1fr); }
+  .workwear-grid { gap: 24px; }
+  .workwear-card-body { padding: 22px; }
+  .workwear-card h3 { font-size: 32px; }
+  .workwear-card-body > p { min-height: 0; }
+  .workwear-logo > span { font-size: 11px; }
+  .workwear-details { gap: 36px; }
+}
